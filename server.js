@@ -27,6 +27,7 @@ app.use(expressLayouts);
 app.use(express.static('public'));
 // Librairies qui rend les choses plus facile pour aller chercher la valeur d'un input d'un post dans un requête
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: false }));
+// app.use(bodyParser.json());
 
 // Configuration base de données (MongoDB)
 const mogoose = require('mongoose');

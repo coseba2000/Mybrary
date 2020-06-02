@@ -7,6 +7,8 @@ router.get('/', async (req, res) => {
   // Variable for the search option
   let searchOptions = {};
   // Une requête get passe les informations via le mot clé 'query' et non body comme avec post
+
+  // if (req.query.name != null && req.query.name !== '') {
   if (req.query.name) {
     searchOptions.name = new RegExp(req.query.name, 'i'); // i -> insensible à la casse
   }
@@ -14,7 +16,10 @@ router.get('/', async (req, res) => {
   try {
     // Empty object will return us all the authors
     const authors = await Author.find(searchOptions);
-    res.render('authors/index', { authors: authors, searchOptions: req.query });
+    res.render('authors/index', {
+      authors: authors,
+      searchOptions: req.query,
+    });
   } catch {
     res.redirect('/');
   }
