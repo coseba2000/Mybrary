@@ -6,9 +6,11 @@ if (process.env.NODE_ENV !== 'production') {
 const express = require('express');
 const app = express();
 const expressLayouts = require('express-ejs-layouts');
+const bodyParser = require('body-parser');
 
 // Import du fichier contenant les routes
 const indexRouter = require('./routes/index');
+const authorRouter = require('./routes/authors');
 
 /**
  * Configuration d'express
@@ -23,6 +25,8 @@ app.set('layout', 'layouts/layout');
 app.use(expressLayouts);
 // On dit a express que notre dossier qui contient les fichiers img,css,js,.. est public
 app.use(express.static('public'));
+// Librairies qui rend les choses plus facile pour aller chercher la valeur d'un input d'un post dans un requête
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: false }));
 
 // Configuration base de données (MongoDB)
 const mogoose = require('mongoose');
@@ -41,6 +45,7 @@ db.once('open', () => console.log('Connected to mongoose'));
  * Dans le controller (sur node le dossier controller est plus souvent appelé 'routes')
  */
 app.use('/', indexRouter);
+app.use('/authors', authorRouter);
 
 // On dit à l'application quel port elle va utiliser
 // process.env.PORT est le serveur qui nous dit le port à utiliser
