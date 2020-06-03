@@ -11,6 +11,7 @@ const bodyParser = require('body-parser');
 // Import du fichier contenant les routes
 const indexRouter = require('./routes/index');
 const authorRouter = require('./routes/authors');
+const bookRouter = require('./routes/books');
 
 /**
  * Configuration d'express
@@ -47,6 +48,7 @@ db.once('open', () => console.log('Connected to mongoose'));
  */
 app.use('/', indexRouter);
 app.use('/authors', authorRouter);
+app.use('/books', bookRouter);
 
 // On dit à l'application quel port elle va utiliser
 // process.env.PORT est le serveur qui nous dit le port à utiliser
