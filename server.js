@@ -7,6 +7,7 @@ const express = require('express');
 const app = express();
 const expressLayouts = require('express-ejs-layouts');
 const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
 
 // Import du fichier contenant les routes
 const indexRouter = require('./routes/index');
@@ -24,6 +25,9 @@ app.set('views', __dirname + '/views');
 app.set('layout', 'layouts/layout');
 // On spécifie l'utilisation d'express layouts
 app.use(expressLayouts);
+// On dit qu'on utilise methodOverride qui va nous servir via un formulaire d'utiliser d'autres méthode http que post et get (put, delete) et on lui spécifie le paramètre qui va nous permettre de l'utiliser
+app.use(methodOverride('_method'));
+
 // On dit a express que notre dossier qui contient les fichiers img,css,js,.. est public
 app.use(express.static('public'));
 // Librairies qui rend les choses plus facile pour aller chercher la valeur d'un input d'un post dans un requête
