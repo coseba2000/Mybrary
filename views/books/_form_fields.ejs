@@ -11,6 +11,7 @@
         <% authors.forEach(author => { %>
         <% // console.log(`Book :${typeof book.author} ${book.author}`) %>
         <% // console.log(`Author :${typeof author.id} ${author.id}`) %>
+
         <% if (author.id === String(book.author)) { %>
         <option value="<%= author.id %>" label="<%= author.name %>" selected></option>
         <% } else { %>
